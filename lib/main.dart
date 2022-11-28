@@ -50,19 +50,28 @@ import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 bool useConch = true;
 
+test(){
+
+}
+
 @ConchScope()
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Paint.enableDithering = true;
 
   // 加载conch
   if (useConch) {
-    final source = await rootBundle.loadString('assets/conch_data/conch_result.json');
+    final source = await rootBundle.loadString('assets/conch_data/conch_result.dat');
     ConchDispatch.instance.loadSource(source);
-    ConchDispatch.instance.setLogger(LogLevel.Verbose);
+    ConchDispatch.instance.setLogger(LogLevel.Debug);
     ConchDispatch.instance.setTypeCheck(TypeCheckLevel.TypeCheck);
+    await ConchDispatch.instance.classTable['package:blackhole/main.dart_annoy_library_class']!.staticMethodPool["mainInner"]!.runAsync(null, {});
+    return;
   }
+  await mainInner();
+}
 
+mainInner() async {
+  Paint.enableDithering = true;
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await Hive.initFlutter('BlackHole');
   } else {
@@ -76,7 +85,7 @@ Future<void> main() async {
     setOptimalDisplayMode();
   }
   await startService();
-  runApp(useConch ? ConchDispatch.instance.createObject('package:blackhole/main.dart', 'MyApp') as Widget : MyApp());
+  runApp(MyApp());
 }
 
 Future<void> setOptimalDisplayMode() async {
@@ -156,6 +165,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+    test();
     super.initState();
     final String lang = Hive.box('settings').get('lang', defaultValue: 'English') as String;
     final Map<String, String> codes = {

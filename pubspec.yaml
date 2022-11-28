@@ -53,11 +53,11 @@ dependencies:
   youtube_explode_dart: 1.10.6
 
   flutter_conch_plugin:
-#    path: /Users/skylerli/conch/conch-plugin
-    hosted:
-      name: flutter_conch_plugin
-      url: http://pub.oa.com
-    version: 1.1.4
+    path: /Users/skylerli/conch/conch-plugin
+#    hosted:
+#      name: flutter_conch_plugin
+#      url: http://pub.oa.com
+#    version: 1.1.4
 
 
 dependency_overrides:
@@ -89,5 +89,5 @@ msix_config:
   file_extension: .mp3, .m4a
 
 conch:
-  symbolBuild: false
+  symbolBuild: true
   outPath: ./assets/conch_data
