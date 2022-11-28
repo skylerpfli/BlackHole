@@ -52,6 +52,17 @@ dependencies:
   uuid: ^3.0.6
   youtube_explode_dart: 1.10.6
 
+  flutter_conch_plugin:
+#    path: /Users/skylerli/conch/conch-plugin
+    hosted:
+      name: flutter_conch_plugin
+      url: http://pub.oa.com
+    version: 1.1.4
+
+
+dependency_overrides:
+  json_annotation: 4.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -67,6 +78,7 @@ flutter:
   assets:
     # Add assets to the application.
     - assets/
+    - assets/conch_data/
 
 msix_config:
   display_name: BlackHole
@@ -75,3 +87,7 @@ msix_config:
   icons_background_color: transparent
   logo_path: assets/ic_launcher.png
   file_extension: .mp3, .m4a
+
+conch:
+  symbolBuild: false
+  outPath: ./assets/conch_data

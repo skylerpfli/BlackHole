@@ -38,6 +38,8 @@ import 'package:blackhole/Services/audio_service.dart';
 import 'package:blackhole/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_conch_plugin/annotation/conch_scope.dart';
+import 'package:flutter_conch_plugin/conch_dispatch.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -46,9 +48,20 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
+bool useConch = true;
+
+@ConchScope()
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Paint.enableDithering = true;
+
+  // 加载conch
+  if (useConch) {
+    final source = await rootBundle.loadString('assets/conch_data/conch_result.json');
+    ConchDispatch.instance.loadSource(source);
+    ConchDispatch.instance.setLogger(LogLevel.Verbose);
+    ConchDispatch.instance.setTypeCheck(TypeCheckLevel.TypeCheck);
+  }
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await Hive.initFlutter('BlackHole');
@@ -63,7 +76,7 @@ Future<void> main() async {
     setOptimalDisplayMode();
   }
   await startService();
-  runApp(MyApp());
+  runApp(useConch ? ConchDispatch.instance.createObject('package:blackhole/main.dart', 'MyApp') as Widget : MyApp());
 }
 
 Future<void> setOptimalDisplayMode() async {
@@ -79,8 +92,7 @@ Future<void> setOptimalDisplayMode() async {
       (DisplayMode a, DisplayMode b) => b.refreshRate.compareTo(a.refreshRate),
     );
 
-  final DisplayMode mostOptimalMode =
-      sameResolution.isNotEmpty ? sameResolution.first : active;
+  final DisplayMode mostOptimalMode = sameResolution.isNotEmpty ? sameResolution.first : active;
 
   await FlutterDisplayMode.setPreferredMode(mostOptimalMode);
 }
@@ -128,8 +140,7 @@ class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 
-  static _MyAppState of(BuildContext context) =>
-      context.findAncestorStateOfType<_MyAppState>()!;
+  static _MyAppState of(BuildContext context) => context.findAncestorStateOfType<_MyAppState>()!;
 }
 
 class _MyAppState extends State<MyApp> {
@@ -146,8 +157,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    final String lang =
-        Hive.box('settings').get('lang', defaultValue: 'English') as String;
+    final String lang = Hive.box('settings').get('lang', defaultValue: 'English') as String;
     final Map<String, String> codes = {
       'Chinese': 'zh',
       'Czech': 'cs',
@@ -200,9 +210,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget initialFuntion() {
-    return Hive.box('settings').get('userId') != null
-        ? HomePage()
-        : AuthScreen();
+    return Hive.box('settings').get('userId') != null ? HomePage() : AuthScreen();
   }
 
   @override
@@ -210,15 +218,9 @@ class _MyAppState extends State<MyApp> {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
-        systemNavigationBarColor: AppTheme.themeMode == ThemeMode.dark
-            ? Colors.black38
-            : Colors.white,
-        statusBarIconBrightness: AppTheme.themeMode == ThemeMode.dark
-            ? Brightness.light
-            : Brightness.dark,
-        systemNavigationBarIconBrightness: AppTheme.themeMode == ThemeMode.dark
-            ? Brightness.light
-            : Brightness.dark,
+        systemNavigationBarColor: AppTheme.themeMode == ThemeMode.dark ? Colors.black38 : Colors.white,
+        statusBarIconBrightness: AppTheme.themeMode == ThemeMode.dark ? Brightness.light : Brightness.dark,
+        systemNavigationBarIconBrightness: AppTheme.themeMode == ThemeMode.dark ? Brightness.light : Brightness.dark,
       ),
     );
     SystemChrome.setPreferredOrientations([
