@@ -50,9 +50,7 @@ import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 bool useConch = true;
 
-test(){
-
-}
+test() {}
 
 @ConchScope()
 Future<void> main() async {
@@ -60,11 +58,11 @@ Future<void> main() async {
 
   // 加载conch
   if (useConch) {
-    final source = await rootBundle.loadString('assets/conch_data/conch_result.dat');
+    final source = await rootBundle.loadString('assets/conch_data/conch_result.json');
     ConchDispatch.instance.loadSource(source);
     ConchDispatch.instance.setLogger(LogLevel.Debug);
     ConchDispatch.instance.setTypeCheck(TypeCheckLevel.TypeCheck);
-    await ConchDispatch.instance.classTable['package:blackhole/main.dart_annoy_library_class']!.staticMethodPool["mainInner"]!.runAsync(null, {});
+    ConchDispatch.instance.callStaticFun(library: 'package:blackhole/main.dart', funcName: 'mainInner');
     return;
   }
   await mainInner();

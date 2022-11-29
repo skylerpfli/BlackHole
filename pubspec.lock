@@ -310,10 +310,10 @@ packages:
   flutter_conch_plugin:
     dependency: "direct main"
     description:
-      path: "/Users/skylerli/conch/conch-plugin"
-      relative: false
-    source: path
-    version: "1.1.4"
+      name: flutter_conch_plugin
+      url: "http://pub.oa.com"
+    source: hosted
+    version: "1.1.4+1"
   flutter_displaymode:
     dependency: "direct main"
     description:

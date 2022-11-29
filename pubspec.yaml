@@ -53,11 +53,10 @@ dependencies:
   youtube_explode_dart: 1.10.6
 
   flutter_conch_plugin:
-    path: /Users/skylerli/conch/conch-plugin
-#    hosted:
-#      name: flutter_conch_plugin
-#      url: http://pub.oa.com
-#    version: 1.1.4
+    hosted:
+      name: flutter_conch_plugin
+      url: http://pub.oa.com
+    version: 1.1.4+1
 
 
 dependency_overrides:
