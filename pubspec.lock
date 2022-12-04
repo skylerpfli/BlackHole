@@ -273,7 +273,7 @@ packages:
       name: file_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.2.2"
+    version: "5.2.3"
   flip_card:
     dependency: "direct main"
     description:
@@ -310,9 +310,9 @@ packages:
   flutter_conch_plugin:
     dependency: "direct main"
     description:
-      name: flutter_conch_plugin
-      url: "http://pub.oa.com"
-    source: hosted
+      path: "/Users/lipengfei/conch/conch-plugin"
+      relative: false
+    source: path
     version: "1.1.4+1"
   flutter_displaymode:
     dependency: "direct main"
@@ -517,7 +517,7 @@ packages:
       name: mime
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.2"
+    version: "1.0.3"
   msix:
     dependency: "direct dev"
     description:

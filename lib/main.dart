@@ -60,8 +60,8 @@ Future<void> main() async {
   if (useConch) {
     final source = await rootBundle.loadString('assets/conch_data/conch_result.json');
     ConchDispatch.instance.loadSource(source);
-    ConchDispatch.instance.setLogger(LogLevel.Debug);
-    ConchDispatch.instance.setTypeCheck(TypeCheckLevel.TypeCheck);
+    // ConchDispatch.instance.setLogger(LogLevel.Debug);
+    // ConchDispatch.instance.setTypeCheck(TypeCheckLevel.TypeCheck);
     ConchDispatch.instance.callStaticFun(library: 'package:blackhole/main.dart', funcName: 'mainInner');
     return;
   }

@@ -21,7 +21,9 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_conch_plugin/annotation/conch_exclude.dart';
 
+@ConchExclude()
 Future<void> downloadChecker() async {
   final List songs = Hive.box('downloads').values.toList();
   final List<String> keys = await compute(checkPaths, songs);
