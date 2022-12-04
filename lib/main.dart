@@ -50,18 +50,14 @@ import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 bool useConch = true;
 
-test() {}
-
 @ConchScope()
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // 加载conch
+  // 加载conch补丁
   if (useConch) {
     final source = await rootBundle.loadString('assets/conch_data/conch_result.json');
     ConchDispatch.instance.loadSource(source);
-    // ConchDispatch.instance.setLogger(LogLevel.Debug);
-    // ConchDispatch.instance.setTypeCheck(TypeCheckLevel.TypeCheck);
     ConchDispatch.instance.callStaticFun(library: 'package:blackhole/main.dart', funcName: 'mainInner');
     return;
   }
@@ -163,7 +159,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    test();
     super.initState();
     final String lang = Hive.box('settings').get('lang', defaultValue: 'English') as String;
     final Map<String, String> codes = {
