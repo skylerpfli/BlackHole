@@ -1,4 +1,6 @@
-**用于Conch热更新验证**
+**Conch热更新体验工程**
+
+使用请参照https://git.woa.com/flutter_components/FlutterDynamic/conch-demo说明
 
 ---
 ![Repo Banner](https://user-images.githubusercontent.com/87353286/144381080-faf8e557-7909-43a1-a8e2-208936e5a8f8.png)
