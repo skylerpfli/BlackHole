@@ -38,7 +38,7 @@ import 'package:blackhole/Services/audio_service.dart';
 import 'package:blackhole/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_conch_plugin/annotation/conch_scope.dart';
+import 'package:flutter_conch_plugin/annotation/patch_scope.dart';
 import 'package:flutter_conch_plugin/conch_dispatch.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -50,7 +50,7 @@ import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 bool useConch = true;
 
-@ConchScope()
+@PatchScope()
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
